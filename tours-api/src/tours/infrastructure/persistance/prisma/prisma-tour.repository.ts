@@ -3,8 +3,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { Tour } from 'src/tours/domain/entities/tour';
 import { TourRepository } from 'src/tours/domain/repositories/tour.repository';
 import { TourMapper } from '../mappers/tour.mapper';
-import { PaginatiedDto } from 'src/common/dto/paginated.dto';
 import { PaginateDto } from 'src/common/dto/paginate.dto';
+import { PaginatedTour, PaginatedTourDto } from 'src/tours/application/dto';
 
 @Injectable()
 export class PrismaTourRepository extends TourRepository {
@@ -17,7 +17,7 @@ export class PrismaTourRepository extends TourRepository {
     return record ? TourMapper.toEntity(record) : null;
   }
 
-  async findAll(dto: PaginateDto): Promise<PaginatiedDto<Tour>> {
+  async findAll(dto: PaginateDto): Promise<PaginatedTour> {
     const page = dto.page ?? 1;
     const limit = dto.limit ?? 10;
 
@@ -34,7 +34,7 @@ export class PrismaTourRepository extends TourRepository {
 
     const totalPages = Math.ceil(total / limit);
 
-    return new PaginatiedDto<Tour>({
+    return new PaginatedTourDto({
       data: entities,
       total,
       pageIndex: page,

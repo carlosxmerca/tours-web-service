@@ -11,15 +11,18 @@ import {
 import { PaginateDto } from 'src/common/dto/paginate.dto';
 import {
   CreateTourDto,
+  PaginatedTourResponse,
+  PaginatedTourResponseDto,
   TourResponseDto,
   UpdateTourDto,
 } from '../application/dto';
 import { FindAllToursUseCase } from '../application/use-cases/find-all-tours.use-case';
 import { FindTourByIdUseCase } from '../application/use-cases/find-tour-by-id.use-case';
-import { PaginatiedDto } from 'src/common/dto/paginated.dto';
 import { CreateTourUseCase } from '../application/use-cases/cerate-tour.use-case';
 import { DeleteTourUseCase } from '../application/use-cases/delete-tour.use-case';
 import { UpdateTourUseCase } from '../application/use-cases/update-tour.use-case';
+import { MessageDto } from 'src/common/dto/message.dto';
+import { ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('tours')
 export class ToursController {
@@ -32,23 +35,28 @@ export class ToursController {
   ) {}
 
   @Get()
-  findAll(
-    @Query() query: PaginateDto,
-  ): Promise<PaginatiedDto<TourResponseDto>> {
+  @ApiOkResponse({
+    description: 'Tours disponibles',
+    type: PaginatedTourResponseDto,
+  })
+  findAll(@Query() query: PaginateDto): Promise<PaginatedTourResponse> {
     return this.findAllToursUseCase.execute(query);
   }
 
   @Get(':id')
-  findById(@Param('id') id: string) {
+  @ApiOkResponse({ description: 'Tour encontrado', type: TourResponseDto })
+  findById(@Param('id') id: string): Promise<TourResponseDto> {
     return this.findTourByIdUseCase.execute(id);
   }
 
   @Post()
+  @ApiOkResponse({ description: 'Tour creado', type: TourResponseDto })
   create(@Body() dto: CreateTourDto): Promise<TourResponseDto> {
     return this.createTourUseCase.execute(dto);
   }
 
   @Patch(':id')
+  @ApiOkResponse({ description: 'Tour actualizado', type: TourResponseDto })
   update(
     @Param('id') id: string,
     @Body() dto: UpdateTourDto,
@@ -57,12 +65,15 @@ export class ToursController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string): Promise<void> {
-    return this.deleteTourUseCase.execute(id);
+  @ApiOkResponse({ description: 'Tour eliminado', type: MessageDto })
+  async delete(@Param('id') id: string): Promise<MessageDto> {
+    await this.deleteTourUseCase.execute(id);
+    return { message: 'Recurso eliminado' };
   }
 
   @Get('health')
-  healthCheck(): { message: string } {
+  @ApiOkResponse({ description: 'Health check', type: MessageDto })
+  healthCheck(): MessageDto {
     return { message: 'Hello World!' };
   }
 }

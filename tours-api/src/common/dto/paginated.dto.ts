@@ -1,11 +1,27 @@
-export class PaginatiedDto<T> {
-  data: T[];
-  total: number;
-  pageIndex: number;
-  pageSize: number;
-  totalPages: number;
+import { Type } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 
-  constructor(partial: PaginatiedDto<T>) {
-    Object.assign(this, partial);
+export function createPaginatedDto<T>(ItemDto: Type<T>) {
+  class PaginatedDto {
+    @ApiProperty({ type: [ItemDto] })
+    data: T[];
+
+    @ApiProperty()
+    total: number;
+
+    @ApiProperty()
+    pageIndex: number;
+
+    @ApiProperty()
+    pageSize: number;
+
+    @ApiProperty()
+    totalPages: number;
+
+    constructor(partial: Partial<PaginatedDto>) {
+      Object.assign(this, partial);
+    }
   }
+
+  return PaginatedDto;
 }

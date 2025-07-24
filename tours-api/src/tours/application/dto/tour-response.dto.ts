@@ -1,13 +1,29 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Tour } from 'src/tours/domain/entities/tour';
 
 export class TourResponseDto {
+  @ApiProperty()
   id: string;
+
+  @ApiProperty()
   name: string;
+
+  @ApiProperty()
   address: string;
-  description?: string;
-  image?: string;
+
+  @ApiProperty()
+  description: string;
+
+  @ApiProperty()
+  image: string;
+
+  @ApiProperty()
   likes: number;
+
+  @ApiProperty()
   createdAt: Date;
+
+  @ApiProperty()
   updatedAt: Date;
 
   constructor(tour: Tour) {
