@@ -23,6 +23,7 @@ import { DeleteTourUseCase } from '../application/use-cases/delete-tour.use-case
 import { UpdateTourUseCase } from '../application/use-cases/update-tour.use-case';
 import { MessageDto } from 'src/common/dto/message.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
+import { LikeTourUseCase } from '../application/use-cases/like-tour.use-case';
 
 @Controller('tours')
 export class ToursController {
@@ -31,6 +32,7 @@ export class ToursController {
     private readonly findTourByIdUseCase: FindTourByIdUseCase,
     private readonly createTourUseCase: CreateTourUseCase,
     private readonly updateTourUseCase: UpdateTourUseCase,
+    private readonly likeTourUseCase: LikeTourUseCase,
     private readonly deleteTourUseCase: DeleteTourUseCase,
   ) {}
 
@@ -62,6 +64,12 @@ export class ToursController {
     @Body() dto: UpdateTourDto,
   ): Promise<TourResponseDto> {
     return this.updateTourUseCase.execute(id, dto);
+  }
+
+  @Patch(':id/like')
+  @ApiOkResponse({ description: 'Like registrado', type: TourResponseDto })
+  giveLike(@Param('id') id: string): Promise<TourResponseDto> {
+    return this.likeTourUseCase.execute(id);
   }
 
   @Delete(':id')

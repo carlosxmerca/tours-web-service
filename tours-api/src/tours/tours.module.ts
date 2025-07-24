@@ -7,6 +7,8 @@ import { TourRepository } from './domain/repositories/tour.repository';
 import { PrismaTourRepository } from './infrastructure/persistance/prisma/prisma-tour.repository';
 import { UpdateTourUseCase } from './application/use-cases/update-tour.use-case';
 import { DeleteTourUseCase } from './application/use-cases/delete-tour.use-case';
+import { LikeTourUseCase } from './application/use-cases/like-tour.use-case';
+import { TourGateway } from './infrastructure/gateways/tour.gateway';
 
 @Module({
   providers: [
@@ -14,7 +16,9 @@ import { DeleteTourUseCase } from './application/use-cases/delete-tour.use-case'
     FindTourByIdUseCase,
     CreateTourUseCase,
     UpdateTourUseCase,
+    LikeTourUseCase,
     DeleteTourUseCase,
+    TourGateway,
     {
       provide: TourRepository,
       useClass: PrismaTourRepository,
