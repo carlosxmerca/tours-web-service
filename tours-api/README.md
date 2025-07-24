@@ -44,12 +44,13 @@ $ npm run test:cov
 ```
 
 ## TODO
-- Likes feature and real time update
+- Likes feature and real time update (DONE)
 - Swagger implementation (DONE)
-- CORS config
+- CORS config (DONE)
 - Code documentation
 - Unit tests using jest
 - Code review to verify clean arch complience and SOLID principles
-- Create Docker file and modify docker compose to lauch app ready to prod
+- Create Docker file and modify docker compose to lauch app ready to prod (DONE)
 - Update port config to be dynamic (DONE)
 - Add log startegy to track requests and latency (DONE)
+- Run migration if database is empty
