@@ -22,7 +22,7 @@ El siguiente comando:
 - Aplicará automáticamente migraciones y datos iniciales (seeds), facilitando la revisión y despliegue del módulo.
 
 ```
-cd tous-api
+cd tours-api
 docker compose up -d
 ```
 
@@ -35,7 +35,7 @@ El proyecto incluye 4 suites de pruebas con los siguientes objetivos:
 - Confirmar que el servicio de Prisma exista y esté correctamente habilitado.
 
 ```
-cd tous-api
+cd tours-api
 npm run test
 ```
 
