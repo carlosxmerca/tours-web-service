@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    # Volume shall be added to keep data consistency
+    environment:
+      - POSTGRES_PASSWORD=<POSTGRES_PASSWORD>
+      - POSTGRES_USER=<POSTGRES_USER>
+      - POSTGRES_DB=<POSTGRES_DB>
+
+  tours-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - 3001:3001
+    environment:
+      - DATABASE_URL=postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@postgres:5432/<POSTGRES_DB>?schema=public&connection_limit=5&socket_timeout=3
+      - PORT=<API_PORT>
+      - ORIGINS=<ALLOWED_ORIGINS>
