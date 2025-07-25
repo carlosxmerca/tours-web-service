@@ -28,6 +28,9 @@ export class PrismaTourRepository extends TourRepository {
     const records = await this.prisma.tour.findMany({
       skip,
       take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     const entities = records.map(TourMapper.toEntity);
