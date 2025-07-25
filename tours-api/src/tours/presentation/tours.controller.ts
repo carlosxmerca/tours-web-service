@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   Query,
@@ -47,7 +48,7 @@ export class ToursController {
 
   @Get(':id')
   @ApiOkResponse({ description: 'Tour encontrado', type: TourResponseDto })
-  findById(@Param('id') id: string): Promise<TourResponseDto> {
+  findById(@Param('id', ParseUUIDPipe) id: string): Promise<TourResponseDto> {
     return this.findTourByIdUseCase.execute(id);
   }
 
@@ -60,7 +61,7 @@ export class ToursController {
   @Patch(':id')
   @ApiOkResponse({ description: 'Tour actualizado', type: TourResponseDto })
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateTourDto,
   ): Promise<TourResponseDto> {
     return this.updateTourUseCase.execute(id, dto);
@@ -68,13 +69,13 @@ export class ToursController {
 
   @Patch(':id/like')
   @ApiOkResponse({ description: 'Like registrado', type: TourResponseDto })
-  giveLike(@Param('id') id: string): Promise<TourResponseDto> {
+  giveLike(@Param('id', ParseUUIDPipe) id: string): Promise<TourResponseDto> {
     return this.likeTourUseCase.execute(id);
   }
 
   @Delete(':id')
   @ApiOkResponse({ description: 'Tour eliminado', type: MessageDto })
-  async delete(@Param('id') id: string): Promise<MessageDto> {
+  async delete(@Param('id', ParseUUIDPipe) id: string): Promise<MessageDto> {
     await this.deleteTourUseCase.execute(id);
     return { message: 'Recurso eliminado' };
   }

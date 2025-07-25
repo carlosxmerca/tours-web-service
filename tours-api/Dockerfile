@@ -12,6 +12,9 @@ COPY . .
 
 RUN npx prisma generate
 
+COPY start.sh ./start.sh
+RUN chmod +x start.sh
+
 RUN npm run build
 
 # Etapa 2: producción
@@ -21,8 +24,12 @@ WORKDIR /app
 
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/start.sh ./start.sh
 COPY --from=builder /app/dist ./dist
+
+RUN chmod +x start.sh
 
 EXPOSE 3001
 
-CMD ["node", "dist/main"]
+CMD ["./start.sh"]
