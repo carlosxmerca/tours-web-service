@@ -16,5 +16,6 @@ export function useInfiniteTours(limit = 10) {
       }
       return undefined;
     },
+    staleTime: 60 * 1000,
   });
 }

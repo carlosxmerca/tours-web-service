@@ -4,9 +4,11 @@ import Button from "@/components/atoms/Button/Button";
 import TourCard from "@/components/molecules/TourCard/TourCard";
 import { useDeleteTour } from "@/lib/hooks/useDeleteTour";
 import { useInfiniteTours } from "@/lib/hooks/useTours";
+import { useToursLikesSocket } from "@/lib/hooks/useToursLikesSocket";
 import { Tour } from "@/lib/schemas/tour.schema";
 
 export default function TourCards() {
+  const limit = 3;
   const {
     data,
     fetchNextPage,
@@ -16,8 +18,9 @@ export default function TourCards() {
     isLoading,
     error,
   } = useInfiniteTours(3);
-
   const deleteTourMutation = useDeleteTour();
+
+  useToursLikesSocket(limit);
 
   if (status === "error") return <p>Error: {error.message}</p>;
 
