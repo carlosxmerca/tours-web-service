@@ -1,5 +1,5 @@
 import Separator from "@/components/atoms/Separator.tsx/Separator.tsx";
-import TourCard from "@/components/molecules/TourCard/TourCard";
+import TourCardWithSocket from "@/components/organisms/TourCardWithSocket/TourCardWithSocket";
 import { findTourById } from "@/use-cases/tours";
 
 interface Props {
@@ -17,7 +17,7 @@ export default async function TourPage({ params }: Props) {
     <>
       <div className="w-full h-full px-8 mb-16">
         <div className="w-full h-full p-12 bg-white rounded-lg">
-          <TourCard tour={tour} displayOptions={false} />
+          <TourCardWithSocket tour={tour} />
         </div>
       </div>
       <Separator />

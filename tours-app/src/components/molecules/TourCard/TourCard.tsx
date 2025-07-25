@@ -41,7 +41,7 @@ export default function TourCard({
       <div className="py-8 px-20 relative">
         <LikeIndicator
           likes={tour.likes}
-          liked={true}
+          tourId={tour.id}
           className="absolute top-6 right-6"
         />
         <h2 className="font-bold text-4xl text-center">{tour.name}</h2>

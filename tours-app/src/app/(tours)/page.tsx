@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Banner />
       <Separator />
-      <div className="w-full h-auto py-12 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[14rem]">
+      <div className="w-full h-auto py-12 px-4 sm:px-8 md:px-12 lg:px-14 xl:px-[14rem]">
         <TourCards />
       </div>
     </>
