@@ -46,6 +46,12 @@ export class ToursController {
     return this.findAllToursUseCase.execute(query);
   }
 
+  @Get('health')
+  @ApiOkResponse({ description: 'Health check', type: MessageDto })
+  healthCheck(): MessageDto {
+    return { message: 'Hello World!' };
+  }
+
   @Get(':id')
   @ApiOkResponse({ description: 'Tour encontrado', type: TourResponseDto })
   findById(@Param('id', ParseUUIDPipe) id: string): Promise<TourResponseDto> {
@@ -78,11 +84,5 @@ export class ToursController {
   async delete(@Param('id', ParseUUIDPipe) id: string): Promise<MessageDto> {
     await this.deleteTourUseCase.execute(id);
     return { message: 'Recurso eliminado' };
-  }
-
-  @Get('health')
-  @ApiOkResponse({ description: 'Health check', type: MessageDto })
-  healthCheck(): MessageDto {
-    return { message: 'Hello World!' };
   }
 }

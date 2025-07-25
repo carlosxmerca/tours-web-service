@@ -36,6 +36,10 @@ El proyecto incluye 4 suites de pruebas con los siguientes objetivos:
 
 ```
 cd tours-api
+
+npm install
+npx prisma generate
+
 npm run test
 ```
 
