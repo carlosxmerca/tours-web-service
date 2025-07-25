@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tours app
+
+Proyecto desarrollado con Next.js 14, cuyo objetivo principal es ofrecer a los usuarios una interfaz interactiva para explorar y gestionar tours consumiendo una API de tours.
+
+La aplicación está construida siguiendo los principios de Clean Architecture y Atomic Design, lo que permite una separación clara de responsabilidades y facilita la escalabilidad y mantenibilidad del código.
+
+Se utiliza React Query junto con Axios para la gestión eficiente de datos y las llamadas a la API, incorporando funcionalidades como caché, actualizaciones optimistas y paginación infinita. Además, se integran WebSockets para actualizar en tiempo real la cantidad de likes de los tours.
+
+La interfaz está diseñada con Tailwind CSS, ofreciendo una experiencia visual moderna y adaptable. Según el caso de uso, se emplean componentes renderizados tanto en SSR (Server-Side Rendering) como en CSR (Client-Side Rendering).
 
 ## Getting Started
 
