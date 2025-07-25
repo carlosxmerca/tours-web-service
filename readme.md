@@ -84,8 +84,13 @@ La interfaz está diseñada con Tailwind CSS, ofreciendo una experiencia visual 
 
 ```
 cd tours-app
+
+npm install
 npm run dev
 ```
+
+Sitio web accesible desde:
+http://localhost:3000/
 
 ### Interfaz de usuario (UI)
 
