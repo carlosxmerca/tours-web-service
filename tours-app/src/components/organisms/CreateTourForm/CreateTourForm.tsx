@@ -3,12 +3,14 @@
 import Button from "@/components/atoms/Button/Button";
 import FormInput from "@/components/atoms/Form/FormInput/FormInput";
 import FormTextarea from "@/components/atoms/Form/FormTextarea/FormTextarea";
+import { useCreateTour } from "@/lib/hooks/useCreateTour";
 import {
   CreateTourDto,
   CreateTourSchema,
 } from "@/lib/schemas/createTour.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function CreateTourForm() {
   const methods = useForm<CreateTourDto>({
@@ -21,10 +23,20 @@ export default function CreateTourForm() {
     resolver: zodResolver(CreateTourSchema),
   });
 
+  const createTourMutation = useCreateTour();
+
   const { handleSubmit } = methods;
 
   const onSubmit = (data: CreateTourDto) => {
-    console.log("Submitting:", data);
+    createTourMutation.mutate(data, {
+      onSuccess: () => {
+        toast.success("Destino agregado exitosamente");
+        methods.reset();
+      },
+      onError: () => {
+        toast.error("Ocurrió un error al agregar el destino");
+      },
+    });
   };
 
   return (
