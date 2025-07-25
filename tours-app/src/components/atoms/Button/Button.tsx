@@ -6,6 +6,7 @@ interface ButtonProps {
   className?: string;
   variant?: "primary" | "secondary" | "ghost";
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -14,6 +15,7 @@ export default function Button({
   className = "",
   variant = "primary",
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const btnBaseClasses =
     "flex justify-center items-center px-6 py-2 rounded-md text-base font-medium transition-colors duration-200";
@@ -34,6 +36,7 @@ export default function Button({
         }
       }}
       className={`${btnBaseClasses} ${btnVariantClasses[variant]} ${className}`}
+      disabled={disabled}
     >
       {text}
     </button>

@@ -14,7 +14,7 @@ export default function LikeIndicator({
   const Icon = liked ? GoHeartFill : GoHeart;
 
   return (
-    <div className={`flex gap-1 items-center text-lg text-red-500 ${className}`}>
+    <div className={`flex gap-1 items-center text-lg text-red-500 cursor-pointer ${className}`}>
       <p>{likes}</p>
       <Icon className="w-5 h-5" />
     </div>

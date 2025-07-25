@@ -1,9 +1,20 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { findAllTours } from "@/use-cases/tours";
-import { useQuery } from "@tanstack/react-query";
 
-export function useTours(params?: { page?: number; limit?: number }) {
-  return useQuery({
-    queryKey: ["tours", params],
-    queryFn: () => findAllTours(params),
+export function useInfiniteTours(limit = 10) {
+  return useInfiniteQuery({
+    queryKey: ["tours", limit],
+    queryFn: ({ pageParam = 1 }) => findAllTours({ page: pageParam, limit }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (
+        lastPage?.pageIndex &&
+        lastPage?.totalPages &&
+        lastPage.pageIndex < lastPage.totalPages
+      ) {
+        return lastPage.pageIndex + 1;
+      }
+      return undefined;
+    },
   });
 }
