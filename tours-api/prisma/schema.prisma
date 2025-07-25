@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tour {
+  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String      @db.VarChar(100)
+  address     String      @db.VarChar(300)
+  description String      @db.VarChar(4000)
+  image     String        @db.VarChar(300)
+  likes     Int           @default(0)
+  updatedAt DateTime    @default(now())
+  createdAt DateTime    @default(now())
+}
