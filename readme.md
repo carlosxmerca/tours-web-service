@@ -8,7 +8,7 @@ Su diseño facilita la integración con distintos clientes y permite la evoluci�
 
 - Utiliza Prisma como ORM, implementando un enfoque code-first para la gestión de migraciones y carga de datos iniciales (seeding).
 
-- Expone endpoints a través del controlador /tours.
+- Expone endpoints a través del controlador `/tours`.
 
 - Incluye un API Gateway con soporte para WebSockets, permitiendo a los clientes suscribirse y recibir actualizaciones en tiempo real.
 
@@ -110,4 +110,4 @@ El proyecto incluye archivos `.env` y `docker-compose.yaml` para facilitar el de
 
 - En ambientes de producción, estos archivos no deben ser publicados ni compartidos bajo ninguna circunstancia.
 
-- Si se realiza un fork del proyecto, se debe actualizar el archivo .gitignore para evitar exponer credenciales accidentalmente.
+- Si se realiza un fork del proyecto, se debe actualizar el archivo `.gitignore` para evitar exponer credenciales accidentalmente.
