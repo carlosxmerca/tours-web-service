@@ -11,5 +11,11 @@ interface Props {
 export default function TourCardWithSocket({ tour }: Props) {
   const likes = useTourLikeSocket(tour.id, tour.likes);
 
-  return <TourCard tour={{ ...tour, likes }} displayOptions={false} />;
+  return (
+    <TourCard
+      tour={{ ...tour, likes }}
+      displayOptions={false}
+      imageSize="big"
+    />
+  );
 }

@@ -12,6 +12,7 @@ interface TourCardProps {
   className?: string;
   maxDescriptionLength?: number;
   deleteTour?: (tour: Tour) => void;
+  imageSize?: "small" | "big";
 }
 
 function truncateText(text: string, maxLength: number) {
@@ -25,6 +26,7 @@ export default function TourCard({
   maxDescriptionLength,
   deleteTour,
   displayOptions = true,
+  imageSize = "small",
 }: TourCardProps) {
   const descriptionToShow =
     maxDescriptionLength !== undefined
@@ -35,7 +37,9 @@ export default function TourCard({
     <div className={`w-full h-auto rounded-xl bg-white ${className}`}>
       <SafeImage
         src={tour.image}
-        className="w-full h-[14rem] object-cover rounded-t-xl"
+        className={`w-full object-cover rounded-t-xl ${
+          imageSize == "small" ? "h-[14rem]" : "h-[34rem]"
+        }`}
         alt="Sitio turistico"
       />
       <div className="py-8 px-20 relative">

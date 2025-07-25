@@ -16,7 +16,7 @@ export default async function TourPage({ params }: Props) {
   return (
     <>
       <div className="w-full h-full px-8 mb-16">
-        <div className="w-full h-full p-12 bg-white rounded-lg">
+        <div className="w-full h-full lg:p-12 bg-white rounded-lg">
           <TourCardWithSocket tour={tour} />
         </div>
       </div>

@@ -1,23 +1,34 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
-interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface SafeImageProps {
+  src?: string;
+  alt?: string;
   fallbackSrc?: string;
+  className?: string;
+  imageClassName?: string;
 }
 
 export default function SafeImage({
+  src,
+  alt = "Imagen",
   fallbackSrc = "/img/san_andres.png",
-  ...props
+  className,
+  imageClassName = "rounded-t-xl",
 }: SafeImageProps) {
-  const [src, setSrc] = useState(props.src);
+  const [imgSrc, setImgSrc] = useState(src || fallbackSrc);
 
   return (
-    <img
-      {...props}
-      src={src}
-      onError={() => setSrc(fallbackSrc)}
-      alt={props.alt || "Imagen"}
-    />
+    <div className={`relative ${className}`}>
+      <Image
+        src={imgSrc}
+        alt={alt}
+        fill
+        className={`object-cover ${imageClassName}`}
+        onError={() => setImgSrc(fallbackSrc)}
+      />
+    </div>
   );
 }
