@@ -1,12 +1,24 @@
 import { Injectable, LoggerService } from '@nestjs/common';
 import * as winston from 'winston';
 import LokiTransport from 'winston-loki';
+import WinstonCloudWatch from 'winston-cloudwatch';
 
 @Injectable()
 export class WinstonLogger implements LoggerService {
   private readonly logger: winston.Logger;
 
   constructor() {
+    const cloudwatchTransport = new WinstonCloudWatch({
+      logGroupName: process.env.CW_LOG_GROUP || 'tours-app-logs',
+      logStreamName: process.env.CW_LOG_STREAM || 'tours-api',
+      awsRegion: process.env.AWS_REGION || 'us-east-2',
+      jsonMessage: true,
+    });
+
+    cloudwatchTransport.on('error', (err) => {
+      console.error('CloudWatch error:', err.message);
+    });
+
     this.logger = winston.createLogger({
       level: 'info',
       format: winston.format.combine(
@@ -20,6 +32,7 @@ export class WinstonLogger implements LoggerService {
           json: true,
           labels: { service: 'tours-api' },
         }),
+        cloudwatchTransport,
       ],
     });
   }
