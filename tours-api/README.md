@@ -54,3 +54,7 @@ $ npm run test:cov
 - Update port config to be dynamic (DONE)
 - Add log startegy to track requests and latency (DONE)
 - Run migration if database is empty
+
+https://github.com/willsoto/nestjs-prometheus
+
+https://github.com/lazywithclass/winston-cloudwatch#readme
